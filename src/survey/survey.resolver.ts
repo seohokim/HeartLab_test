@@ -15,9 +15,9 @@ import {
   UpdateSurveyOutputDto,
 } from './dto/update-survey.dto';
 import {
-  RemoveSurveyInputDto,
-  RemoveSurveyOutputDto,
-} from './dto/remove-survey.dto';
+  DeleteSurveyInputDto,
+  DeleteSurveyOutputDto,
+} from './dto/delete-survey.dto';
 
 @Resolver((of) => SurveyType)
 export class SurveyResolver {
@@ -49,9 +49,9 @@ export class SurveyResolver {
   }
 
   @Mutation((returns) => SurveyType)
-  async removeSurvey(
-    @Args('updateSurveyInput') removeSurveyInput: RemoveSurveyInputDto,
-  ): Promise<RemoveSurveyOutputDto> {
-    return this.surveyService.remove(removeSurveyInput);
+  async deleteSurvey(
+    @Args('updateSurveyInput') deleteSurveyInput: DeleteSurveyInputDto,
+  ): Promise<DeleteSurveyOutputDto> {
+    return this.surveyService.delete(deleteSurveyInput);
   }
 }

@@ -29,30 +29,30 @@ describe('SurveyService', () => {
 
   describe('create', () => {
     it('survey 생성했다면 ok return 해야함', async () => {
-      const createSurveyInputDto = {
+      const createSurveyInput = {
         title: 'Test Survey',
         description: 'Test Description',
       };
       const survey = new Survey();
-      survey.title = createSurveyInputDto.title;
+      survey.title = createSurveyInput.title;
       jest.spyOn(repository, 'findOne').mockResolvedValueOnce(undefined);
       jest.spyOn(repository, 'create').mockReturnValueOnce(survey);
       jest.spyOn(repository, 'save').mockResolvedValueOnce(survey);
-      const result = await service.create(createSurveyInputDto);
+      const result = await service.create(createSurveyInput);
       expect(result).toEqual({
         ok: true,
         statusCode: 200,
-        survey: expect.any(Object),
+        surveyDto: expect.any(Object),
       });
     });
 
     it('서버에 에러가 있다면, server-error return 해야함', async () => {
-      const createSurveyInputDto = {
+      const createSurveyInput = {
         title: 'Test Survey',
         description: 'Test Description',
       };
       jest.spyOn(repository, 'findOne').mockRejectedValueOnce(new Error());
-      const result = await service.create(createSurveyInputDto);
+      const result = await service.create(createSurveyInput);
       expect(result).toEqual({
         ok: false,
         statusCode: 500,
@@ -63,22 +63,22 @@ describe('SurveyService', () => {
 
   describe('findOne', () => {
     it('입력한 id에 해당하는 survey가 있다면, 해당 survey return 해야함', async () => {
-      const getSurveyInputDto = { id: 1 };
+      const getSurveyInput = { id: 1 };
       const survey = new Survey();
-      survey.id = getSurveyInputDto.id;
+      survey.id = getSurveyInput.id;
       jest.spyOn(repository, 'findOne').mockResolvedValueOnce(survey);
-      const result = await service.findOne(getSurveyInputDto);
+      const result = await service.findOne(getSurveyInput);
       expect(result).toEqual({
         ok: true,
         statusCode: 200,
-        survey: expect.any(Object),
+        surveyDto: expect.any(Object),
       });
     });
 
     it('입력한 id에 해당하는 survey가 없다면, surver-not-found return 해야함', async () => {
-      const getSurveyInputDto = { id: 1 };
+      const getSurveyInput = { id: 1 };
       jest.spyOn(repository, 'findOne').mockResolvedValueOnce(undefined);
-      const result = await service.findOne(getSurveyInputDto);
+      const result = await service.findOne(getSurveyInput);
       expect(result).toEqual({
         ok: false,
         statusCode: 404,
@@ -87,9 +87,9 @@ describe('SurveyService', () => {
     });
 
     it('서버에 에러가 있다면, server-error return 해야함', async () => {
-      const getSurveyInputDto = { id: 1 };
+      const getSurveyInput = { id: 1 };
       jest.spyOn(repository, 'findOne').mockRejectedValueOnce(new Error());
-      const result = await service.findOne(getSurveyInputDto);
+      const result = await service.findOne(getSurveyInput);
       expect(result).toEqual({
         ok: false,
         statusCode: 500,
@@ -106,7 +106,7 @@ describe('SurveyService', () => {
       expect(result).toEqual({
         ok: true,
         statusCode: 200,
-        surveys: expect.any(Object),
+        surveyDtos: expect.any(Object),
       });
     });
 
@@ -123,33 +123,33 @@ describe('SurveyService', () => {
 
   describe('update', () => {
     it('survey update 해야함', async () => {
-      const updateSurveyInputDto = {
+      const updateSurveyInput = {
         id: 1,
         title: 'Updated Survey',
         description: 'Updated Description',
       };
       const survey = new Survey();
-      survey.id = updateSurveyInputDto.id;
-      survey.title = updateSurveyInputDto.title;
-      survey.description = updateSurveyInputDto.description;
+      survey.id = updateSurveyInput.id;
+      survey.title = updateSurveyInput.title;
+      survey.description = updateSurveyInput.description;
       jest.spyOn(repository, 'findOne').mockResolvedValueOnce(survey);
       jest.spyOn(repository, 'save').mockResolvedValueOnce(survey);
-      const result = await service.update(updateSurveyInputDto);
+      const result = await service.update(updateSurveyInput);
       expect(result).toEqual({
         ok: true,
         statusCode: 200,
-        survey: expect.any(Object),
+        surveyDto: expect.any(Object),
       });
     });
 
     it('입력한 id에 해당하는 survey가 없다면, survey-not-found return 해야함', async () => {
-      const updateSurveyInputDto = {
+      const updateSurveyInput = {
         id: 1,
         title: 'Updated Survey',
         description: 'Updated Description',
       };
       jest.spyOn(repository, 'findOne').mockResolvedValueOnce(undefined);
-      const result = await service.update(updateSurveyInputDto);
+      const result = await service.update(updateSurveyInput);
       expect(result).toEqual({
         ok: false,
         statusCode: 404,
@@ -158,9 +158,9 @@ describe('SurveyService', () => {
     });
 
     it('서버에 에러가 있다면, server-error return 해야함', async () => {
-      const updateSurveyInputDto = { id: 1, title: 'Updated Survey' };
+      const updateSurveyInput = { id: 1, title: 'Updated Survey' };
       jest.spyOn(repository, 'findOne').mockRejectedValueOnce(new Error());
-      const result = await service.update(updateSurveyInputDto);
+      const result = await service.update(updateSurveyInput);
       expect(result).toEqual({
         ok: false,
         statusCode: 500,
@@ -169,25 +169,26 @@ describe('SurveyService', () => {
     });
   });
 
-  describe('remove', () => {
+  describe('delete', () => {
     it('survey 제거해야함', async () => {
-      const removeSurveyInputDto = { id: 1 };
+      const deleteSurveyInput = { id: 1 };
       const survey = new Survey();
-      survey.id = removeSurveyInputDto.id;
       jest.spyOn(repository, 'findOne').mockResolvedValueOnce(survey);
-      jest.spyOn(repository, 'remove').mockResolvedValueOnce(undefined);
-      const result = await service.remove(removeSurveyInputDto);
+      jest.spyOn(repository, 'remove').mockResolvedValueOnce(survey);
+
+      const result = await service.delete(deleteSurveyInput);
+
       expect(result).toEqual({
         ok: true,
         statusCode: 200,
-        survey: expect.any(Object),
+        surveyDto: expect.any(Object),
       });
     });
 
     it('입력한 id에 해당하는 survey가 없다면, survey-not-found return 해야함', async () => {
-      const removeSurveyInputDto = { id: 1 };
+      const deleteSurveyInput = { id: 1 };
       jest.spyOn(repository, 'findOne').mockResolvedValueOnce(undefined);
-      const result = await service.remove(removeSurveyInputDto);
+      const result = await service.delete(deleteSurveyInput);
       expect(result).toEqual({
         ok: false,
         statusCode: 404,
@@ -196,9 +197,9 @@ describe('SurveyService', () => {
     });
 
     it('서버에 에러가 있다면, server-error return 해야함', async () => {
-      const removeSurveyInputDto = { id: 1 };
+      const deleteSurveyInput = { id: 1 };
       jest.spyOn(repository, 'findOne').mockRejectedValueOnce(new Error());
-      const result = await service.remove(removeSurveyInputDto);
+      const result = await service.delete(deleteSurveyInput);
       expect(result).toEqual({
         ok: false,
         statusCode: 500,

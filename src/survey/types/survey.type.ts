@@ -1,18 +1,18 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { IsNumber, IsString } from 'class-validator';
+import { IsInt, IsString } from 'class-validator';
 import { QuestionType } from '../../question/types/question.type';
 
 @ObjectType()
 export class SurveyType {
   @Field(() => Int)
-  @IsNumber()
+  @IsInt()
   id: number;
 
-  @Field()
+  @Field(() => String)
   @IsString()
   title: string;
 
-  @Field()
+  @Field(() => String)
   @IsString()
   description: string;
 

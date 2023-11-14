@@ -1,16 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Survey } from './entities/survey.entity';
+import { Survey, SurveyDTO } from './entities/survey.entity';
 import {
   CreateSurveyInputDto,
   CreateSurveyOutputDto,
 } from './dto/create-survey.dto';
 import {
-  generateErrorResponse,
   generateOkResponse,
+  handleErrorResponse,
 } from '../common/utils/response.util';
-import logger from '../logger/logger.service';
 import {
   GetSurveyInputDto,
   GetSurveyOutputDto,
@@ -21,9 +20,11 @@ import {
   UpdateSurveyOutputDto,
 } from './dto/update-survey.dto';
 import {
-  RemoveSurveyInputDto,
-  RemoveSurveyOutputDto,
-} from './dto/remove-survey.dto';
+  DeleteSurveyInputDto,
+  DeleteSurveyOutputDto,
+} from './dto/delete-survey.dto';
+import { SurveyNotFoundError } from '../common/error/error.class';
+import { QuestionDTO } from 'src/question/dto/question.dto';
 
 @Injectable()
 export class SurveyService {
@@ -32,132 +33,135 @@ export class SurveyService {
     private surveyRepository: Repository<Survey>,
   ) {}
 
+  // create 메서드
   async create(
-    createSurveyInputDto: CreateSurveyInputDto,
+    createSurveyInput: CreateSurveyInputDto,
   ): Promise<CreateSurveyOutputDto> {
     try {
-      const survey = this.surveyRepository.create(createSurveyInputDto);
-      await this.surveyRepository.save(survey);
-      return generateOkResponse<CreateSurveyOutputDto>(200, { survey });
+      const survey = await this.createAndSaveSurvey(createSurveyInput);
+      const surveyDto = this.toSurveyDto(survey);
+      return generateOkResponse<CreateSurveyOutputDto>(200, { surveyDto });
     } catch (error) {
-      return generateErrorResponse<CreateSurveyOutputDto>(
-        ['server-error'],
-        500,
+      return handleErrorResponse<CreateSurveyOutputDto>(
         error,
         'SurveyService.create',
       );
     }
   }
 
+  // read 메서드
   async findOne(
-    getSurveyInputDto: GetSurveyInputDto,
+    getSurveyInput: GetSurveyInputDto,
   ): Promise<GetSurveyOutputDto> {
     try {
-      const survey = await this.findSurveyById(getSurveyInputDto.id);
-      if (!survey) {
-        return generateErrorResponse<GetSurveyOutputDto>(
-          ['survey-not-found'],
-          404,
-        );
-      }
-      return generateOkResponse<GetSurveyOutputDto>(200, { survey });
+      const surveyEntity = await this.findSurveyById(getSurveyInput.id);
+      const surveyDto = this.toSurveyDto(surveyEntity);
+      return generateOkResponse<GetSurveyOutputDto>(200, { surveyDto });
     } catch (error) {
-      return generateErrorResponse<GetSurveyOutputDto>(
-        ['server-error'],
-        500,
+      return handleErrorResponse<GetSurveyOutputDto>(
         error,
         'SurveyService.findOne',
       );
     }
   }
 
+  // readAll 메서드
   async findAll(): Promise<GetSurveysOutputDto> {
     try {
-      const surveys = await this.surveyRepository.find({
+      const surveyEntities = await this.surveyRepository.find({
         relations: ['questions'],
       });
-      return generateOkResponse<GetSurveysOutputDto>(200, { surveys });
+      const surveyDtos = surveyEntities.map((survey) =>
+        this.toSurveyDto(survey),
+      );
+      return generateOkResponse<GetSurveysOutputDto>(200, {
+        surveyDtos,
+      });
     } catch (error) {
-      return generateErrorResponse<GetSurveysOutputDto>(
-        ['server-error'],
-        500,
+      return handleErrorResponse<GetSurveysOutputDto>(
         error,
         'SurveyService.findAll',
       );
     }
   }
 
+  // update 메서드
   async update(
-    updateSurveyInputDto: UpdateSurveyInputDto,
+    updateSurveyInput: UpdateSurveyInputDto,
   ): Promise<UpdateSurveyOutputDto> {
     try {
-      const survey = await this.findSurveyById(updateSurveyInputDto.id);
-      if (!survey) {
-        return generateErrorResponse<UpdateSurveyOutputDto>(
-          ['survey-not-found'],
-          404,
-        );
-      }
-      const updatedSurvey = await this.updateSurvey(
-        survey,
-        updateSurveyInputDto,
-      );
+      const updatedSurvey = await this.updateAndSaveSurvey(updateSurveyInput);
+      const surveyDto = this.toSurveyDto(updatedSurvey);
       return generateOkResponse<UpdateSurveyOutputDto>(200, {
-        survey: updatedSurvey,
+        surveyDto,
       });
     } catch (error) {
-      return generateErrorResponse<UpdateSurveyOutputDto>(
-        ['server-error'],
-        500,
+      return handleErrorResponse<UpdateSurveyOutputDto>(
         error,
         'SurveyService.update',
       );
     }
   }
 
-  async remove(
-    removeSurveyInputDto: RemoveSurveyInputDto,
-  ): Promise<RemoveSurveyOutputDto> {
+  // delete 메서드
+  async delete(
+    deleteSurveyInput: DeleteSurveyInputDto,
+  ): Promise<DeleteSurveyOutputDto> {
     try {
-      const survey = await this.findSurveyById(removeSurveyInputDto.id);
-      if (!survey) {
-        return generateErrorResponse<RemoveSurveyOutputDto>(
-          ['survey-not-found'],
-          404,
-        );
-      }
+      const survey = await this.findSurveyById(deleteSurveyInput.id);
       await this.surveyRepository.remove(survey);
-      return generateOkResponse<RemoveSurveyOutputDto>(200, { survey });
+      const surveyDto = this.toSurveyDto(survey);
+      return generateOkResponse<DeleteSurveyOutputDto>(200, { surveyDto });
     } catch (error) {
-      return generateErrorResponse<RemoveSurveyOutputDto>(
-        ['server-error'],
-        500,
+      return handleErrorResponse<DeleteSurveyOutputDto>(
         error,
-        'SurveyService.remove',
+        'SurveyService.delete',
       );
     }
   }
 
-  private async findSurveyById(id: number): Promise<Survey | undefined> {
-    try {
-      return await this.surveyRepository.findOne({ where: { id } });
-    } catch (error) {
-      throw new Error(error);
-    }
+  private async createAndSaveSurvey(
+    createSurveyInput: CreateSurveyInputDto,
+  ): Promise<Survey> {
+    const survey = this.surveyRepository.create(createSurveyInput);
+    await this.surveyRepository.save(survey);
+    return survey;
   }
 
-  private async updateSurvey(
-    survey: Survey,
-    updateSurveyInputDto: UpdateSurveyInputDto,
-  ): Promise<Survey> {
-    try {
-      const updatedSurvey = await this.surveyRepository.save({
-        ...survey,
-        ...updateSurveyInputDto,
-      });
-      return updatedSurvey;
-    } catch (error) {
-      throw new Error(error);
+  async findSurveyById(id: number): Promise<Survey> {
+    const survey = await this.surveyRepository.findOne({ where: { id } });
+    if (!survey) {
+      throw new SurveyNotFoundError('Survey not found');
     }
+    return survey;
+  }
+
+  private async updateAndSaveSurvey(
+    updateSurveyInput: UpdateSurveyInputDto,
+  ): Promise<Survey> {
+    const survey = await this.findSurveyById(updateSurveyInput.id);
+    Object.assign(survey, updateSurveyInput);
+    await this.surveyRepository.save(survey);
+    return survey;
+  }
+
+  toSurveyDto(surveyEntity: Survey): SurveyDTO {
+    const { questions } = surveyEntity;
+    let questionDtos: QuestionDTO[] = [];
+    if (questions) {
+      questionDtos = questions.map((question) => {
+        return {
+          text: question.text,
+          questionOrder: question.questionOrder,
+          surveyId: question.survey.id,
+          createdAt: question.createdAt,
+          updatedAt: question.updatedAt,
+        };
+      });
+    }
+    return {
+      ...surveyEntity,
+      questions: questionDtos,
+    };
   }
 }

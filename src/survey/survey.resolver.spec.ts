@@ -11,9 +11,9 @@ import {
   UpdateSurveyOutputDto,
 } from './dto/update-survey.dto';
 import {
-  RemoveSurveyInputDto,
-  RemoveSurveyOutputDto,
-} from './dto/remove-survey.dto';
+  DeleteSurveyInputDto,
+  DeleteSurveyOutputDto,
+} from './dto/delete-survey.dto';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Survey } from './entities/survey.entity';
 import { Repository } from 'typeorm';
@@ -157,7 +157,7 @@ describe('SurveyResolver', () => {
   });
 
   describe('removeSurvey', () => {
-    it('should remove a survey', async () => {
+    it('should delete a survey', async () => {
       const survey = {
         id: 1,
         title: 'Test Survey',
@@ -166,17 +166,17 @@ describe('SurveyResolver', () => {
         createdAt: new Date(),
         updatedAt: new Date(),
       };
-      jest.spyOn(service, 'remove').mockImplementation(async () => ({
+      jest.spyOn(service, 'delete').mockImplementation(async () => ({
         ok: true,
         statusCode: 200,
         survey,
       }));
 
-      const removeSurveyInput: RemoveSurveyInputDto = { id: 1 };
-      const result: RemoveSurveyOutputDto =
-        await resolver.removeSurvey(removeSurveyInput);
+      const removeSurveyInput: DeleteSurveyInputDto = { id: 1 };
+      const result: DeleteSurveyOutputDto =
+        await resolver.deleteSurvey(removeSurveyInput);
 
-      expect(service.remove).toHaveBeenCalledWith(removeSurveyInput);
+      expect(service.delete).toHaveBeenCalledWith(removeSurveyInput);
       expect(result).toEqual({ ok: true, statusCode: 200, survey });
     });
   });
