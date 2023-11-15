@@ -134,7 +134,7 @@ describe('QuestionService', () => {
         .mockResolvedValue(question.survey);
 
       const result: GetQuestionOutputDto =
-        await service.findOne(getQuestionInputDto);
+        await service.questionFindOne(getQuestionInputDto);
       const questionDto = service['toQuestionDto'](question);
       expect(surveyRepository.findOne).toHaveBeenCalledWith({
         where: { id: getQuestionInputDto.surveyId },
@@ -154,7 +154,7 @@ describe('QuestionService', () => {
       };
       jest.spyOn(surveyRepository, 'findOne').mockResolvedValue(undefined);
 
-      const result = await service.findOne(getQuestionInputDto);
+      const result = await service.questionFindOne(getQuestionInputDto);
       expect(result).toEqual({
         ok: false,
         statusCode: 404,
@@ -172,7 +172,7 @@ describe('QuestionService', () => {
       survey.questions = [];
       jest.spyOn(surveyRepository, 'findOne').mockResolvedValue(survey);
 
-      const result = await service.findOne(getQuestionInputDto);
+      const result = await service.questionFindOne(getQuestionInputDto);
       expect(result).toEqual({
         ok: false,
         statusCode: 404,
