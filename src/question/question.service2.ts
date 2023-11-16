@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { In, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Question } from './entities/question.entity';
 import {
   CreateQuestionInputDto,
@@ -30,8 +30,6 @@ import {
 import { QuestionDTO } from './dtos/question.dto';
 import { OptionDTO } from '../option/dtos/option.dto';
 import { SurveyService } from '../survey/survey.service';
-import { Option } from '../option/entities/option.entity';
-import { Answer } from '../answer/entities/answer.entity';
 
 @Injectable()
 export class QuestionService {
@@ -40,11 +38,6 @@ export class QuestionService {
     private readonly questionRepository: Repository<Question>,
     @InjectRepository(Survey)
     private readonly surveyRepository: Repository<Survey>,
-    @InjectRepository(Option)
-    private readonly optionRepository: Repository<Option>,
-    @InjectRepository(Answer)
-    private readonly answerRepository: Repository<Answer>,
-
     private readonly surveyService: SurveyService,
   ) {}
 
@@ -178,29 +171,6 @@ export class QuestionService {
       deleteQuestionInputDto.surveyId,
       deleteQuestionInputDto.questionOrder,
     );
-
-    const options = await this.optionRepository.find({
-      where: { question: { id: question.id } },
-    });
-    for (let option of options) {
-      const answersWithOption = await this.answerRepository
-        .createQueryBuilder('answer')
-        .leftJoinAndSelect('answer.selectedOptions', 'selectedOption')
-        .where('selectedOption.id = :optionId', { optionId: option.id })
-        .getMany();
-
-      for (let answer of answersWithOption) {
-        console.log(answer);
-        answer.selectedOptions = answer.selectedOptions.filter(
-          (o) => o.id !== option.id,
-        );
-        await this.answerRepository.save(answer);
-      }
-
-      // Option 삭제
-      await this.optionRepository.remove(option);
-    }
-
     await this.questionRepository.remove(question);
 
     const survey = await this.surveyRepository.findOne({

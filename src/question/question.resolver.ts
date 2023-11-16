@@ -4,47 +4,47 @@ import { QuestionType } from './types/question.type';
 import {
   CreateQuestionInputDto,
   CreateQuestionOutputDto,
-} from './dto/create-question.dto';
+} from './dtos/create-question.dto';
 import {
   UpdateQuestionInputDto,
   UpdateQuestionOutputDto,
-} from './dto/update-question.dto';
+} from './dtos/update-question.dto';
 import {
   GetQuestionInputDto,
   GetQuestionOutputDto,
-} from './dto/get-question.dto';
+} from './dtos/get-question.dto';
 import {
   DeleteQuestionInputDto,
   DeleteQuestionOutputDto,
-} from './dto/delete-question.dto';
+} from './dtos/delete-question.dto';
 
 @Resolver((of) => QuestionType)
 export class QuestionResolver {
   constructor(private questionService: QuestionService) {}
 
-  @Query((returns) => QuestionType)
-  async question(
+  @Query((returns) => GetQuestionOutputDto)
+  async getQuestion(
     @Args('getQuestionInput') getQuestionInput: GetQuestionInputDto,
   ): Promise<GetQuestionOutputDto> {
-    return this.questionService.questionFindOne(getQuestionInput);
+    return this.questionService.findOne(getQuestionInput);
   }
 
-  @Mutation((returns) => QuestionType)
+  @Mutation((returns) => CreateQuestionOutputDto)
   async createQuestion(
     @Args('createQuestionInput') createQuestionInput: CreateQuestionInputDto,
   ): Promise<CreateQuestionOutputDto> {
     return this.questionService.create(createQuestionInput);
   }
 
-  @Mutation((returns) => QuestionType)
+  @Mutation((returns) => UpdateQuestionOutputDto)
   async updateQuestion(
     @Args('updateQuestionInput') updateQuestionInput: UpdateQuestionInputDto,
   ): Promise<UpdateQuestionOutputDto> {
     return this.questionService.update(updateQuestionInput);
   }
 
-  @Mutation((returns) => QuestionType)
-  async removeQuestion(
+  @Mutation((returns) => DeleteQuestionOutputDto)
+  async deleteQuestion(
     @Args('deleteQuestionInput') deleteQuestionInput: DeleteQuestionInputDto,
   ): Promise<DeleteQuestionOutputDto> {
     return this.questionService.delete(deleteQuestionInput);
