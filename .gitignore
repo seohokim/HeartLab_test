@@ -35,4 +35,7 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 .prettierrc
-.package-lock.json
+package-lock.json
+.gitignore
+error.log
+schema.gpl
