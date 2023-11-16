@@ -1,64 +1,28 @@
 # Survey API Server
 
+본 프로젝트는 GraphQL을 이용한 설문조사 API 서버 구축입니다.
+
 ---
 
 ## README Index
 
-- [1. Project Environment](#project-environment)
+[1. Project Environment](#project-environment)
 
-- [2. Getting Started](#getting-started)
+[2. Getting Started](#getting-started)
 
-- [3. API Specification](#api-specification)
+[3. API Specification](#api-specification)
 
-  - [3.1 Survey](#survey)
+| [3.1 Survey](#survey)           | [3.2 Question](#question)         |     [3.3 Option](#option)     |                             [3.4 Answer](#answer) |
+| ------------------------------- | :-------------------------------- | :---------------------------: | ------------------------------------------------: |
+| [CreateSurvey](#createsurvey)   | [CreateQuestion](#createquestion) | [CreateOption](#createoption) |                     [CreateAnswer](#createanswer) |
+| [GetSurvey](#getsurvey)         | [GetQuestion](#getquestion)       |    [GetOption](#getoption)    |                           [GetAnswer](#getanswer) |
+| [GetAllSurveys](#getallsurveys) |                                   |                               | [GetAllAnswersForSurvey](#getallanswersforsurvey) |
+| [UpdateSurvey](#updatesurvey)   | [UpdateQuestion](#updatequestion) | [UpdateOption](#updateoption) |                     [UpdateAnswer](#updateanswer) |
+| [DeleteSurvey](#deletesurvey)   | [DeleteQuestion](#deletequestion) | [DeleteOption](#deleteoption) |                     [DeleteAnswer](#deleteanswer) |
 
-    - [3.1.1 CreateSurvey](#createsurvey)
-
-    - [3.1.2 GetSurvey](#getsurvey)
-
-    - [3.1.3 GetAllSurveys](#getallsurveys)
-
-    - [3.1.4 UpdateSurvey](#updatesurvey)
-
-    - [3.1.5 DeleteSurvey](#deletesurvey)
-
-  - [3.2 Question](#question)
-
-    - [3.2.1 CreateQuestion](#createquestion)
-
-    - [3.2.2 GetQuestion](#getquestion)
-
-    - [3.2.3 UpdateQuestion](#updatequestion)
-
-    - [3.2.4 DeleteQuestion](#deletequestion)
-
-  - [3.3 Option](#option)
-
-    - [3.3.1 CreateOption](#createoption)
-
-    - [3.3.2 GetOption](#getoption)
-
-    - [3.3.3 UpdateOption](#updateoption)
-
-    - [3.3.4 DeleteOption](#deleteoption)
-
-  - [3.4 Answer](#answer)
-
-    - [3.4.1 CreateAnswer](#createanswer)
-
-    - [3.4.2 GetAnswer](#getanswer)
-
-    - [3.4.3 GetAllAnswersForSurvey](#getallanswersforsurvey)
-
-    - [3.4.4 UpdateAnswer](#updateanswer)
-
-    - [3.4.5 DeleteAnswer](#deleteanswer)
-
-- [4. File Tree](#file-tree)
+[4. File Tree](#file-tree)
 
 ---
-
-본 프로젝트는 GraphQL을 이용한 설문조사 API 서버 구축입니다.
 
 ## Project Environment
 
