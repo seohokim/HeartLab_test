@@ -591,6 +591,10 @@ query GetAnswerOutputDto {
     ok
     message
     answerDto {
+      surveyDto{
+        title
+        description
+      }
       selectedOptionDtos{
         optionText
         optionOrder
@@ -605,10 +609,6 @@ query GetAnswerOutputDto {
           optionOrder
           score
         }
-      }
-      surveyDto{
-        title
-        description
       }
       totalScore
     }
@@ -668,9 +668,9 @@ mutation UpdateAnswerOutputDto {
     message
     answerDto {
       id
-        surveyDto{
-        title
-        description
+      surveyDto{
+      title
+      description
       }
       selectedOptionDtos{
         questionText
