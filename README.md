@@ -76,9 +76,12 @@ $ npm install
 ```bash
 $ npm run start
 ```
-  <br/>
-    <br/>
 
+  <br/>
+
+  <br/>
+
+---
 # API Specification
 
 API endpoint는 아래와 같습니다. 
