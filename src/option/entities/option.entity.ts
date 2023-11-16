@@ -1,18 +1,32 @@
-import { IsNumber, IsString } from 'class-validator';
-import { Core } from 'src/common/entities/core.entity';
-import { Question } from 'src/question/entities/question.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { Core } from '../../common/entity/core.entity';
+import { Question } from '../../question/entities/question.entity';
+import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
+import { Answer } from '../../answer/entities/answer.entity';
 
 @Entity()
 export class Option extends Core {
   @Column()
   @IsString()
-  text: string;
+  optionText: string;
 
   @Column()
   @IsNumber()
   score: number;
 
-  @ManyToOne(() => Question, (question) => question.options)
+  @Column({ nullable: false })
+  @IsNumber()
+  optionOrder: number;
+
+  @ManyToOne(() => Question, (question) => question.options, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @IsNotEmpty()
   question: Question;
+
+  @ManyToMany(() => Answer, (answer) => answer.selectedOptions, {
+    cascade: true,
+  })
+  answers: Answer[];
 }
