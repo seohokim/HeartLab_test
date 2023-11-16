@@ -2,6 +2,8 @@
 
 본 프로젝트는 GraphQL을 이용한 설문조사 API 서버 구축입니다.
 
+from 김서호
+
 ## README Index
 
 - [1. Project Environment](#project-environment)
