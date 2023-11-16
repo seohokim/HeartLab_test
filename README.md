@@ -86,7 +86,8 @@ query 예시:
 
 ```graphQL
 mutation CreateSurveyOutputDto{
-  createSurvey(createSurveyInput: { title: "취향 설문조사", description: "자신의 취향을 골라주세요." }) {
+  createSurvey(createSurveyInput: { title: "취향 설문조사",
+description: "자신의 취향을 골라주세요." }) {
 		ok
 		message
 		surveyDto{
@@ -117,7 +118,7 @@ query 예시:
 ```graphQL
 query GetSurveyOutputDto{
   getSurvey(getSurveyInput: {surveyId: 1}) {
-		ok
+    ok
 		message
 		surveyDto{
 			id
@@ -178,7 +179,8 @@ query 예시:
 
 ```graphQL
 mutation UpdateSurveyOutputDto{
-	updateSurvey(updateSurveyInput: {surveyId: 1, changedTitle:"당신의 취향은?", changedDescription:"좋아하는 것을 골라주세요"}) {
+	updateSurvey(updateSurveyInput: {surveyId: 1,
+changedTitle:"당신의 취향은?", changedDescription:"좋아하는 것을 골라주세요"}) {
 		ok
 		message
 		surveyDto{
@@ -229,7 +231,8 @@ query 예시:
 
 ```graphQL
 mutation CreateOptionOutputDto {
-	createOption(createOptionInput: {surveyId: 1, questionOrder: 1, optionOrder: 1 ,optionText: "치킨", score: 4}) {
+	createOption(createOptionInput: {surveyId: 1, questionOrder: 1,
+optionOrder: 1 ,optionText: "치킨", score: 4}) {
 		ok
 		message
 		surveyDto{
@@ -259,7 +262,8 @@ query 예시:
 
 ```graphQL
 query GetQuestionOutputDto{
-	getQuestion (getQuestionInput: {surveyId: 5, questionOrder: 2}) {
+	getQuestion (getQuestionInput: {surveyId: 5,
+questionOrder: 2}) {
 		ok
 		message
 		questionDto{
@@ -283,7 +287,8 @@ query 예시:
 
 ```graphQL
 mutation UpdateQuestionOutputDto {
-	updateQuestion(updateQuestionInput: {surveyId: 1,questionOrder: 1, chaingedText: "좋아하는 음식은?"}) {
+	updateQuestion(updateQuestionInput: {surveyId: 1,
+questionOrder: 1, chaingedText: "좋아하는 음식은?"}) {
 		ok
 		message
 		surveyDto{
@@ -313,7 +318,8 @@ query 예시:
 
 ```graphQL
 mutation DeleteQuestionOutputDto {
-	deleteQuestion(deleteQuestionInput: {surveyId: 1,questionOrder: 1}) {
+	deleteQuestion(deleteQuestionInput: {surveyId: 1,
+questionOrder: 1}) {
 		ok
 		message
 		surveyDto{
@@ -349,7 +355,8 @@ query 예시:
 
 ```graphQL
 mutation CreateOptionOutputDto {
-	createOption(createOptionInput: {surveyId: 1, questionOrder: 1, optionOrder: 1 ,optionText: "치킨", score: 4}) {
+	createOption(createOptionInput: {surveyId: 1, questionOrder: 1,
+optionOrder: 1 ,optionText: "치킨", score: 4}) {
 		ok
 		message
 		surveyDto{
@@ -379,7 +386,8 @@ query 예시:
 
 ```graphQL
 query GetOptionOutputDto {
-	getOption(getOptionInput: {surveyId:1, questionOrder: 1, optionOrder:1}) {
+	getOption(getOptionInput: {surveyId:1, questionOrder: 1,
+optionOrder:1}) {
 		ok
 		message
 		optionDto {
@@ -402,7 +410,8 @@ query 예시:
 
 ```graphQL
 mutation UpdateOptionOutputDto {
-	updateOption(updateOptionInput: {surveyId: 1, questionOrder: 1, optionOrder: 1,changedScore: 2, changedText: "피자"}) {
+	updateOption(updateOptionInput: {surveyId: 1, questionOrder: 1,
+optionOrder: 1,changedScore: 2, changedText: "피자"}) {
 		ok
 		message
 		surveyDto{
@@ -432,7 +441,8 @@ query 예시:
 
 ```graphQL
 mutation DeleteOptionOutputDto {
-	deleteOption(deleteOptionInput: {surveyId: 1, questionOrder: 1, optionOrder: 1}) {
+	deleteOption(deleteOptionInput: {surveyId: 1, questionOrder: 1,
+optionOrder: 1}) {
 		ok
 		message
 		surveyDto{
@@ -470,7 +480,8 @@ mutation DeleteOptionOutputDto {
 
 ```graphQL
 mutation CreateAnswerOutputDto {
-	createAnswer(createAnswerInput: {surveyId: 1,questionAndOptionOrders: [[1,1],[2,2]]}) {
+	createAnswer(createAnswerInput: {surveyId: 1,
+questionAndOptionOrders: [[1,1],[2,2]]}) {
 		ok
 		message
 		answerDto {
@@ -580,7 +591,8 @@ query예시:
 
 ```graphQL
 mutation UpdateAnswerOutputDto {
-	updateAnswer(updateAnswerInput: {answerId: 1, questionAndOptionOrders: [[1,1],[2,1],[3,1]]}) {
+	updateAnswer(updateAnswerInput: {answerId: 1,
+questionAndOptionOrders: [[1,1],[2,1],[3,1]]}) {
 		ok
 		message
 		answerDto {
