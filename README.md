@@ -79,6 +79,8 @@ Content-Type: application/json
 `Survey`에 관한 API입니다.
 
 ## CreateSurvey
+_`questionOrder`는 하나의 survey 안에서의 순서 번호입니다_
+_`optionOrder`는 하나의 question 안에서의 순서 번호입니다_
 
 survey 생성
 
