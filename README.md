@@ -537,11 +537,11 @@ mutation DeleteOptionOutputDto {
 
 `surveyId`에 해당하는 survey에 문항을 적어서`[questionOrder,optionOrder]` 답변 생성하기
 
-> 예를 들어, `[[1,2],[3,2]]` => 1번 question의 2번 option 체크, 3번 question 의 2번 option 체크
->
-> > 만약 하나의 question에서 중복해서 작성할 경우, 뒤에 있는 option을 선택. 예를 들어, `[[1,2],[1,1]]`입력할 경우, 1번 option을 선택한 것으로 간주
+- 만약, `[[1,2],[3,2]]` 입력할 경우 => <br/>1번 question의 2번 option 체크, 3번 question 의 2번 option 체크
 
-> `Survey`의 모든 question에 대한 답변을 하기 전까지 totalScore는 `null` return
+- 하나의 question에서 중복해서 작성할 경우, 뒤에 있는 option을 선택. <br/>예를 들어, `[[1,1],[1,2]]`입력할 경우, <br/>1번 question의 2번 option을 선택한 것으로 간주
+  
+- `Survey`의 모든 question에 대한 답변을 하기 전까지 totalScore는 `null` return
 
 ```graphQL
 mutation CreateAnswerOutputDto {
