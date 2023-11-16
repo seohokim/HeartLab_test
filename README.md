@@ -1,73 +1,108 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Survey API Server
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+---
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+본 프로젝트는 설문지 API 서버입니다.
 
-## Description
+## Project Environment
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Installation
+- NodeJS: v18.15.0
+- TypeScript: v5.1.3
+- GraphQL: v16.8.1
+- TypeORM: v0.3.17
+- NestJS: v10.0.0
+- Winston v3.11.0
+
+### Getting Started
+
+---
+
+```bash
+$ git clone https://github.com/seohokim/HeartLab_test.git
+```
+
+## npm install
+
+npm package 설치
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## DB 설정
 
-```bash
-# development
-$ npm run start
+아래 파일을 참고하여 DB 설정을 해주세요.
+[typeorm.config.ts][src/config/typeorm.config.ts]
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+📦HeartLab_test
+┣ 📂[src][src]
+┃ ┣ 📂[answer][src/answer]
+┃ ┃ ┣ 📜[answer.module.ts][src/answer/answer.module.ts]
+┃ ┃ ┣ 📜answer.resolver.ts
+┃ ┃ ┗ 📜answer.service.ts
+┃ ┃ ┣ 📂dtos
+┃ ┃ ┃ ┣ 📜answer.dto.ts
+┃ ┃ ┃ ┣ 📜create-answer.dto.ts
+┃ ┃ ┃ ┣ 📜delete-answer.dto.ts
+┃ ┃ ┃ ┣ 📜get-answer.dto.ts
+┃ ┃ ┃ ┗ 📜update-answer.dto.ts
+┃ ┃ ┗ 📂entities
+┃ ┃ ┃ ┗ 📜answer.entity.ts
+┃ ┣ 📂common
+┃ ┃ ┣ 📂dto
+┃ ┃ ┃ ┗ 📜core.dto.ts
+┃ ┃ ┣ 📂entity
+┃ ┃ ┃ ┗ 📜core.entity.ts
+┃ ┃ ┣ 📂error
+┃ ┃ ┃ ┗ 📜error.class.ts
+┃ ┃ ┗ 📂utils
+┃ ┃ ┃ ┗ 📜response.util.ts
+┃ ┣ 📂config
+┃ ┃ ┣ 📜typeorm.config.ts
+┃ ┃ ┗ 📂config
+┃ ┃ ┃ ┗ 📂logger.ts
+┃ ┃ ┃ ┃ ┗ 📜logger.config.ts
+┃ ┣ 📂option
+┃ ┃ ┣ 📜option.module.ts
+┃ ┃ ┣ 📜option.resolver.ts
+┃ ┃ ┗ 📜option.service.ts
+┃ ┃ ┣ 📂dtos
+┃ ┃ ┃ ┣ 📜option.dto.ts
+┃ ┃ ┃ ┣ 📜create-option.dto.ts
+┃ ┃ ┃ ┣ 📜delete-option.dto.ts
+┃ ┃ ┃ ┣ 📜get-option.dto.ts
+┃ ┃ ┃ ┗ 📜update-option.dto.ts
+┃ ┃ ┣ 📂entities
+┃ ┃ ┃ ┗ 📜option.entity.ts
+┃ ┃ ┗ 📂types
+┃ ┃ ┃ ┗ 📜option.type.ts
+┃ ┣ 📂question
+┃ ┃ ┣ 📜question.module.ts
+┃ ┃ ┣ 📜question.resolver.ts
+┃ ┃ ┗ 📜question.service.ts
+┃ ┃ ┣ 📂dtos
+┃ ┃ ┃ ┣ 📜question.dto.ts
+┃ ┃ ┃ ┣ 📜create-question.dto.ts
+┃ ┃ ┃ ┣ 📜delete-question.dto.ts
+┃ ┃ ┃ ┣ 📜get-question.dto.ts
+┃ ┃ ┃ ┗ 📜update-question.dto.ts
+┃ ┃ ┣ 📂entities
+┃ ┃ ┃ ┗ 📜question.entity.ts
+┃ ┃ ┗ 📂types
+┃ ┃ ┃ ┗ 📜question.type.ts
+┃ ┗ 📂survey
+┃ ┃ ┣ 📜survey.module.ts
+┃ ┃ ┣ 📜survey.resolver.ts
+┃ ┃ ┗ 📜survey.service.ts
+┃ ┃ ┣ 📂dtos
+┃ ┃ ┃ ┣ 📜survey.dto.ts
+┃ ┃ ┃ ┣ 📜create-survey.dto.ts
+┃ ┃ ┃ ┣ 📜delete-survey.dto.ts
+┃ ┃ ┃ ┣ 📜get-survey.dto.ts
+┃ ┃ ┃ ┗ 📜update-survey.dto.ts
+┃ ┃ ┣ 📂entities
+┃ ┃ ┃ ┗ 📜survey.entity.ts
+┃ ┃ ┗ 📂types
+┃ ┃ ┃ ┗ 📜survey.type.ts
