@@ -4,11 +4,14 @@
 
 ## README Index
 
-[1. Project Environment](#project-environment)
+- [1. Project Environment](#project-environment)
 
-[2. Getting Started](#getting-started)
+- [2. Getting Started](#getting-started)
 
-[3. API Specification](#api-specification)
+  
+  <br/>
+
+- [3. API Specification](#api-specification)
 
 | [3.1 Survey](#survey)           | [3.2 Question](#question)         |     [3.3 Option](#option)     |                             [3.4 Answer](#answer) |
 | ------------------------------- | :-------------------------------- | :---------------------------: | ------------------------------------------------: |
@@ -18,7 +21,13 @@
 | [UpdateSurvey](#updatesurvey)   | [UpdateQuestion](#updatequestion) | [UpdateOption](#updateoption) |                     [UpdateAnswer](#updateanswer) |
 | [DeleteSurvey](#deletesurvey)   | [DeleteQuestion](#deletequestion) | [DeleteOption](#deleteoption) |                     [DeleteAnswer](#deleteanswer) |
 
-[4. File Tree](#file-tree)
+
+  <br/>
+
+
+- [4. ER Diagram](#er-diagram)
+
+- [5. File Tree](#file-tree)
 
 ## Project Environment
 
@@ -80,6 +89,7 @@ Content-Type: application/json
 
 ## CreateSurvey
 _`questionOrder`는 하나의 survey 안에서의 순서 번호입니다_
+
 _`optionOrder`는 하나의 question 안에서의 순서 번호입니다_
 
 survey 생성
@@ -641,6 +651,10 @@ mutation DeleteAnswerOutputDto {
 ```
 
 ---
+
+## ER Diagram
+
+![download](https://kroki.io/graphviz/svg/eNqNkM1uwjAQhO95ilWOFCJxJQoSJy6VUEtvUQ4Gr4iFsd21A63avjsJOEB-iHrc8cy33uFiR8zksISfAIipPReUvL7HASjNEVKbM4MJ4VYTz0p1XdARvyGVbIMyCf34Cy_ghJM4A-tIqN1F4Wi3JIwTWtV6mMUQwFuBtlJvmJtQxT798IFfrsGrH1bEkWagisMG6UpcmQbPj1VIm16WLQ_CmvFg7GEvlD2Vnprtx8vJ2jG5fiRdE76Vybx76TSKRuEYGJE-5ch4EipNByZbxZTRVtPTZuqI2I20Whje5c29n3yy6x5pdTKwxju7vxs9WXIP_K-BvzNYjen7)
 
 ## File Tree
 
