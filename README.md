@@ -44,7 +44,7 @@
 $ git clone https://github.com/seohokim/HeartLab_test.git
 ```
 
-### npm install
+## npm install
 
 npm package 설치
 
@@ -52,13 +52,13 @@ npm package 설치
 $ npm install
 ```
 
-### DB 설정
+## DB 설정
 
 아래 config 파일을 수정, 참고하여 DB 설정을 해주세요.
 
 📜[`typeorm.config.ts`](https://github.com/seohokim/HeartLab_test/blob/main/src/config/typeorm.config.ts)
 
-### Start
+## Start
 
 ```bash
 $ npm run start:run
@@ -80,11 +80,11 @@ http://localhost:4000/graphql
 Content-Type: application/json
 ```
 
-### Survey
+## Survey
 
 ---
 
-#### CreateSurvey
+## CreateSurvey
 
 ---
 
@@ -116,7 +116,7 @@ mutation CreateSurveyOutputDto{
 }
 ```
 
-#### GetSurvey
+## GetSurvey
 
 ---
 
@@ -148,7 +148,7 @@ query GetSurveyOutputDto{
 }
 ```
 
-#### GetAllSurveys
+## GetAllSurveys
 
 ---
 
@@ -180,7 +180,7 @@ query GetSurveysOutputDto{
 }
 ```
 
-#### UpdateSurvey
+## UpdateSurvey
 
 ---
 
@@ -214,7 +214,7 @@ mutation UpdateSurveyOutputDto{
 }
 ```
 
-#### DeleteSurvey
+## DeleteSurvey
 
 ---
 
@@ -231,11 +231,11 @@ mutation DeleteSurveyOutputDto{
 }
 ```
 
-### Question
+## Question
 
 ---
 
-#### CreateQuestion
+## CreateQuestion
 
 ---
 
@@ -269,7 +269,7 @@ mutation CreateOptionOutputDto {
 }
 ```
 
-#### GetQuestion
+## GetQuestion
 
 ---
 
@@ -295,7 +295,7 @@ query GetQuestionOutputDto{
 }
 ```
 
-#### UpdateQuestion
+## UpdateQuestion
 
 ---
 
@@ -327,7 +327,7 @@ mutation UpdateQuestionOutputDto {
 }
 ```
 
-#### DeleteQuestion
+## DeleteQuestion
 
 ---
 
@@ -359,11 +359,11 @@ mutation DeleteQuestionOutputDto {
 }
 ```
 
-### Option
+## Option
 
 ---
 
-#### CreateOption
+## CreateOption
 
 ---
 
@@ -397,7 +397,7 @@ mutation CreateOptionOutputDto {
 }
 ```
 
-#### GetOption
+## GetOption
 
 ---
 
@@ -420,7 +420,7 @@ query GetOptionOutputDto {
 }
 ```
 
-#### UpdateOption
+## UpdateOption
 
 ---
 
@@ -454,7 +454,7 @@ mutation UpdateOptionOutputDto {
 }
 ```
 
-#### DeleteOption
+## DeleteOption
 
 ---
 
@@ -486,11 +486,11 @@ mutation DeleteOptionOutputDto {
 }
 ```
 
-### Answer
+## Answer
 
 ---
 
-#### CreateAnswer
+## CreateAnswer
 
 ---
 
@@ -535,7 +535,7 @@ mutation CreateAnswerOutputDto {
 }
 ```
 
-#### GetAnswer
+## GetAnswer
 
 ---
 
@@ -574,7 +574,7 @@ query GetAnswerOutputDto {
 }
 ```
 
-#### GetAllAnswersForSurvey
+## GetAllAnswersForSurvey
 
 ---
 
@@ -608,7 +608,7 @@ query GetAnswersOutputDto {
 }
 ```
 
-#### UpdateAnswer
+## UpdateAnswer
 
 ---
 
@@ -652,7 +652,7 @@ mutation UpdateAnswerOutputDto {
 }
 ```
 
-#### DeleteAnswer
+## DeleteAnswer
 
 ---
 
