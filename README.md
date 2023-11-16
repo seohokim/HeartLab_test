@@ -34,7 +34,7 @@ $ npm install
 ## DB 설정
 
 아래 파일을 참고하여 DB 설정을 해주세요.
-[typeorm.config.ts][./src/config/typeorm.config.ts]
+[typeorm.config.ts](https://github.com/seohokim/HeartLab_test/blob/main/src/config/typeorm.config.ts)
 
 ```
 📦HeartLab_test
