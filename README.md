@@ -2,8 +2,6 @@
 
 본 프로젝트는 GraphQL을 이용한 설문조사 API 서버 구축입니다.
 
----
-
 ## README Index
 
 [1. Project Environment](#project-environment)
@@ -22,11 +20,7 @@
 
 [4. File Tree](#file-tree)
 
----
-
 ## Project Environment
-
----
 
 - NodeJS: v18.15.0
 - TypeScript: v5.1.3
@@ -37,8 +31,6 @@
 - Winston v3.11.0
 
 ## Getting Started
-
----
 
 ```bash
 $ git clone https://github.com/seohokim/HeartLab_test.git
@@ -66,8 +58,6 @@ $ npm run start:run
 
 ## API Specification
 
----
-
 API endpoint는 아래와 같습니다.
 
 ```
@@ -82,11 +72,7 @@ Content-Type: application/json
 
 ## Survey
 
----
-
 ## CreateSurvey
-
----
 
 survey 생성
 
@@ -118,8 +104,6 @@ mutation CreateSurveyOutputDto{
 
 ## GetSurvey
 
----
-
 `surveyId`에 해당하는 survey 가져오기
 
 query 예시:
@@ -150,8 +134,6 @@ query GetSurveyOutputDto{
 
 ## GetAllSurveys
 
----
-
 모든 survey 가져오기
 
 query 예시:
@@ -181,8 +163,6 @@ query GetSurveysOutputDto{
 ```
 
 ## UpdateSurvey
-
----
 
 `surveyId`에 해당하는 survey의 title과 description 수정하기
 
@@ -216,8 +196,6 @@ mutation UpdateSurveyOutputDto{
 
 ## DeleteSurvey
 
----
-
 `surveyId`에 해당하는 survey 삭제하기
 
 query 예시:
@@ -233,11 +211,7 @@ mutation DeleteSurveyOutputDto{
 
 ## Question
 
----
-
 ## CreateQuestion
-
----
 
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question 안에 선택지 추가하기
 
@@ -271,8 +245,6 @@ mutation CreateOptionOutputDto {
 
 ## GetQuestion
 
----
-
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question 가져오기
 
 query 예시:
@@ -296,8 +268,6 @@ query GetQuestionOutputDto{
 ```
 
 ## UpdateQuestion
-
----
 
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question의 `questionText` 수정하기
 
@@ -329,8 +299,6 @@ mutation UpdateQuestionOutputDto {
 
 ## DeleteQuestion
 
----
-
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question 삭제하기
 
 query 예시:
@@ -361,11 +329,7 @@ mutation DeleteQuestionOutputDto {
 
 ## Option
 
----
-
 ## CreateOption
-
----
 
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question 안에 선택지 추가하기
 
@@ -399,8 +363,6 @@ mutation CreateOptionOutputDto {
 
 ## GetOption
 
----
-
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question 안의 option중 원하는 순서의 option 가져오기
 
 query 예시:
@@ -421,8 +383,6 @@ query GetOptionOutputDto {
 ```
 
 ## UpdateOption
-
----
 
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question 안의 option중 원하는 순서의 option 가져오기
 
@@ -456,8 +416,6 @@ mutation UpdateOptionOutputDto {
 
 ## DeleteOption
 
----
-
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question 안의 option중 원하는 순서의 option 삭제하기
 
 query 예시:
@@ -488,11 +446,7 @@ mutation DeleteOptionOutputDto {
 
 ## Answer
 
----
-
 ## CreateAnswer
-
----
 
 `surveyId`에 해당하는 survey에 문항을 적어서`[questionOrder,optionOrder]` 답변 생성하기
 
@@ -537,8 +491,6 @@ mutation CreateAnswerOutputDto {
 
 ## GetAnswer
 
----
-
 `answerId`에 해당하는 answer 불러오기
 
 query 예시:
@@ -576,8 +528,6 @@ query GetAnswerOutputDto {
 
 ## GetAllAnswersForSurvey
 
----
-
 `surveyID`에 해당하는 survey안에 생성했던 모든 answer 불러오기
 
 ```graphQL
@@ -609,8 +559,6 @@ query GetAnswersOutputDto {
 ```
 
 ## UpdateAnswer
-
----
 
 `answerId`에 해당하는 answer의 답변 수정
 
@@ -654,8 +602,6 @@ mutation UpdateAnswerOutputDto {
 
 ## DeleteAnswer
 
----
-
 `answerId`에 해당하는 answer 삭제
 
 ```graphQL
@@ -669,8 +615,6 @@ mutation DeleteAnswerOutputDto {
 ```
 
 ## File Tree
-
----
 
 ```
 📦HeartLab_test
