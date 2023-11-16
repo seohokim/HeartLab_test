@@ -73,7 +73,9 @@ $ npm run start
 
 # API Specification
 
-API endpoint는 아래와 같습니다.
+API endpoint는 아래와 같습니다. 
+
+(로컬에서 돌릴 경우)
 
 ```
 http://localhost:4000/graphql
