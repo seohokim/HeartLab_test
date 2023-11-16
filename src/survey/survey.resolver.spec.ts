@@ -4,16 +4,16 @@ import { SurveyService } from './survey.service';
 import {
   CreateSurveyInputDto,
   CreateSurveyOutputDto,
-} from './dto/create-survey.dto';
-import { GetSurveyInputDto, GetSurveyOutputDto } from './dto/get-survey.dto';
+} from './dtos/create-survey.dto';
+import { GetSurveyInputDto, GetSurveyOutputDto } from './dtos/get-survey.dto';
 import {
   UpdateSurveyInputDto,
   UpdateSurveyOutputDto,
-} from './dto/update-survey.dto';
+} from './dtos/update-survey.dto';
 import {
   DeleteSurveyInputDto,
   DeleteSurveyOutputDto,
-} from './dto/delete-survey.dto';
+} from './dtos/delete-survey.dto';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Survey } from './entities/survey.entity';
 import { Repository } from 'typeorm';
@@ -42,7 +42,7 @@ describe('SurveyResolver', () => {
   });
 
   describe('readSurvey', () => {
-    it('should return a survey', async () => {
+    it('survey 찾기', async () => {
       const survey = {
         id: 1,
         title: 'Test Survey',
@@ -59,7 +59,7 @@ describe('SurveyResolver', () => {
 
       const getSurveyInput: GetSurveyInputDto = { id: 1 };
       const result: GetSurveyOutputDto =
-        await resolver.readSurvey(getSurveyInput);
+        await resolver.getSurvey(getSurveyInput);
 
       expect(service.findOne).toHaveBeenCalledWith(getSurveyInput);
       expect(result).toEqual({ ok: true, statusCode: 200, survey });
@@ -67,7 +67,7 @@ describe('SurveyResolver', () => {
   });
 
   describe('readSurveys', () => {
-    it('should return an array of surveys', async () => {
+    it('모든 survey 찾기', async () => {
       const surveys = [
         {
           id: 1,
@@ -92,7 +92,7 @@ describe('SurveyResolver', () => {
         surveys,
       }));
 
-      const result = await resolver.readSurveys();
+      const result = await resolver.getSurveys();
 
       expect(service.findAll).toHaveBeenCalled();
       expect(result).toEqual({ ok: true, statusCode: 200, surveys });
@@ -100,7 +100,7 @@ describe('SurveyResolver', () => {
   });
 
   describe('createSurvey', () => {
-    it('should create a survey', async () => {
+    it('survey 생성', async () => {
       const survey = {
         id: 1,
         title: 'Test Survey',
@@ -128,7 +128,7 @@ describe('SurveyResolver', () => {
   });
 
   describe('updateSurvey', () => {
-    it('should update a survey', async () => {
+    it('survey 업데이트', async () => {
       const survey = {
         id: 1,
         title: 'Test Survey',
@@ -157,7 +157,7 @@ describe('SurveyResolver', () => {
   });
 
   describe('removeSurvey', () => {
-    it('should delete a survey', async () => {
+    it('survey 삭제', async () => {
       const survey = {
         id: 1,
         title: 'Test Survey',

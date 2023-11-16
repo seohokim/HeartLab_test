@@ -1,9 +1,8 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { Core } from '../../common/entities/core.entity';
-
+import { Core } from '../../common/entity/core.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 import { Question } from '../../question/entities/question.entity';
-import { QuestionDTO } from 'src/question/dto/question.dto';
+import { Answer } from '../../answer/entities/answer.entity';
 
 @Entity()
 export class Survey extends Core {
@@ -18,22 +17,16 @@ export class Survey extends Core {
   description: string;
 
   @OneToMany(() => Question, (question) => question.survey, {
-    cascade: ['remove'], // 삭제 시 하위 엔티티들도 함께 삭제
+    cascade: true,
     nullable: true,
   })
   @IsOptional()
   questions?: Question[];
-}
 
-export class SurveyDTO extends Core {
-  @IsString()
-  @IsNotEmpty()
-  title: string;
-
-  @IsString()
-  @IsNotEmpty()
-  description: string;
-
+  @OneToMany(() => Answer, (answer) => answer.survey, {
+    cascade: true,
+    nullable: true,
+  })
   @IsOptional()
-  questions?: QuestionDTO[];
+  answers?: Answer[];
 }

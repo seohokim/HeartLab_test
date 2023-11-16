@@ -4,54 +4,58 @@ import { SurveyType } from './types/survey.type';
 import {
   CreateSurveyInputDto,
   CreateSurveyOutputDto,
-} from './dto/create-survey.dto';
+} from './dtos/create-survey.dto';
 import {
   GetSurveyInputDto,
   GetSurveyOutputDto,
   GetSurveysOutputDto,
-} from './dto/get-survey.dto';
+} from './dtos/get-survey.dto';
 import {
   UpdateSurveyInputDto,
   UpdateSurveyOutputDto,
-} from './dto/update-survey.dto';
+} from './dtos/update-survey.dto';
 import {
   DeleteSurveyInputDto,
   DeleteSurveyOutputDto,
-} from './dto/delete-survey.dto';
+} from './dtos/delete-survey.dto';
 
 @Resolver((of) => SurveyType)
 export class SurveyResolver {
   constructor(private surveyService: SurveyService) {}
 
-  @Query((returns) => SurveyType)
-  async readSurvey(
+  @Query(() => GetSurveyOutputDto)
+  async getSurvey(
     @Args('getSurveyInput') getSurveyInput: GetSurveyInputDto,
   ): Promise<GetSurveyOutputDto> {
-    return this.surveyService.findOne(getSurveyInput);
+    const result = await this.surveyService.findOne(getSurveyInput);
+    return result;
   }
 
-  @Query((returns) => [SurveyType])
-  async readSurveys(): Promise<GetSurveysOutputDto> {
-    return this.surveyService.findAll();
+  @Query((returns) => GetSurveysOutputDto)
+  async getSurveys(): Promise<GetSurveysOutputDto> {
+    const result = await this.surveyService.findAll();
+    return result;
   }
-  @Mutation((returns) => SurveyType)
+
+  @Mutation(() => CreateSurveyOutputDto)
   async createSurvey(
     @Args('createSurveyInput') createSurveyInput: CreateSurveyInputDto,
   ): Promise<CreateSurveyOutputDto> {
-    return this.surveyService.create(createSurveyInput);
+    return await this.surveyService.create(createSurveyInput);
   }
 
-  @Mutation((returns) => SurveyType)
+  @Mutation(() => UpdateSurveyOutputDto)
   async updateSurvey(
     @Args('updateSurveyInput') updateSurveyInput: UpdateSurveyInputDto,
   ): Promise<UpdateSurveyOutputDto> {
-    return this.surveyService.update(updateSurveyInput);
+    const result = await this.surveyService.update(updateSurveyInput);
+    return result;
   }
 
-  @Mutation((returns) => SurveyType)
+  @Mutation(() => DeleteSurveyOutputDto)
   async deleteSurvey(
-    @Args('updateSurveyInput') deleteSurveyInput: DeleteSurveyInputDto,
+    @Args('deleteSurveyInput') deleteSurveyInput: DeleteSurveyInputDto,
   ): Promise<DeleteSurveyOutputDto> {
-    return this.surveyService.delete(deleteSurveyInput);
+    return await this.surveyService.delete(deleteSurveyInput);
   }
 }

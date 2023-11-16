@@ -41,7 +41,6 @@ describe('SurveyService', () => {
       const result = await service.create(createSurveyInput);
       expect(result).toEqual({
         ok: true,
-        statusCode: 200,
         surveyDto: expect.any(Object),
       });
     });
@@ -55,7 +54,6 @@ describe('SurveyService', () => {
       const result = await service.create(createSurveyInput);
       expect(result).toEqual({
         ok: false,
-        statusCode: 500,
         message: ['server-error'],
       });
     });
@@ -70,7 +68,6 @@ describe('SurveyService', () => {
       const result = await service.findOne(getSurveyInput);
       expect(result).toEqual({
         ok: true,
-        statusCode: 200,
         surveyDto: expect.any(Object),
       });
     });
@@ -81,7 +78,6 @@ describe('SurveyService', () => {
       const result = await service.findOne(getSurveyInput);
       expect(result).toEqual({
         ok: false,
-        statusCode: 404,
         message: ['survey-not-found'],
       });
     });
@@ -92,7 +88,6 @@ describe('SurveyService', () => {
       const result = await service.findOne(getSurveyInput);
       expect(result).toEqual({
         ok: false,
-        statusCode: 500,
         message: ['server-error'],
       });
     });
@@ -105,7 +100,6 @@ describe('SurveyService', () => {
       const result = await service.findAll();
       expect(result).toEqual({
         ok: true,
-        statusCode: 200,
         surveyDtos: expect.any(Object),
       });
     });
@@ -115,7 +109,6 @@ describe('SurveyService', () => {
       const result = await service.findAll();
       expect(result).toEqual({
         ok: false,
-        statusCode: 500,
         message: ['server-error'],
       });
     });
@@ -137,7 +130,6 @@ describe('SurveyService', () => {
       const result = await service.update(updateSurveyInput);
       expect(result).toEqual({
         ok: true,
-        statusCode: 200,
         surveyDto: expect.any(Object),
       });
     });
@@ -152,7 +144,6 @@ describe('SurveyService', () => {
       const result = await service.update(updateSurveyInput);
       expect(result).toEqual({
         ok: false,
-        statusCode: 404,
         message: ['survey-not-found'],
       });
     });
@@ -163,7 +154,6 @@ describe('SurveyService', () => {
       const result = await service.update(updateSurveyInput);
       expect(result).toEqual({
         ok: false,
-        statusCode: 500,
         message: ['server-error'],
       });
     });
@@ -180,8 +170,6 @@ describe('SurveyService', () => {
 
       expect(result).toEqual({
         ok: true,
-        statusCode: 200,
-        surveyDto: expect.any(Object),
       });
     });
 
@@ -191,7 +179,6 @@ describe('SurveyService', () => {
       const result = await service.delete(deleteSurveyInput);
       expect(result).toEqual({
         ok: false,
-        statusCode: 404,
         message: ['survey-not-found'],
       });
     });
@@ -202,7 +189,6 @@ describe('SurveyService', () => {
       const result = await service.delete(deleteSurveyInput);
       expect(result).toEqual({
         ok: false,
-        statusCode: 500,
         message: ['server-error'],
       });
     });

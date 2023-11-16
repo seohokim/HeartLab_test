@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Survey, SurveyDTO } from './entities/survey.entity';
+import { Survey } from './entities/survey.entity';
 import {
   CreateSurveyInputDto,
   CreateSurveyOutputDto,
-} from './dto/create-survey.dto';
+} from './dtos/create-survey.dto';
 import {
   generateOkResponse,
   handleErrorResponse,
@@ -14,17 +14,19 @@ import {
   GetSurveyInputDto,
   GetSurveyOutputDto,
   GetSurveysOutputDto,
-} from './dto/get-survey.dto';
+} from './dtos/get-survey.dto';
 import {
   UpdateSurveyInputDto,
   UpdateSurveyOutputDto,
-} from './dto/update-survey.dto';
+} from './dtos/update-survey.dto';
 import {
   DeleteSurveyInputDto,
   DeleteSurveyOutputDto,
-} from './dto/delete-survey.dto';
+} from './dtos/delete-survey.dto';
 import { SurveyNotFoundError } from '../common/error/error.class';
-import { QuestionDTO } from 'src/question/dto/question.dto';
+import { QuestionDTO } from 'src/question/dtos/question.dto';
+import { OptionDTO } from '../option/dtos/option.dto';
+import { SurveyDTO } from './dtos/survey.dto';
 
 @Injectable()
 export class SurveyService {
@@ -40,7 +42,7 @@ export class SurveyService {
     try {
       const survey = await this.createAndSaveSurvey(createSurveyInput);
       const surveyDto = this.toSurveyDto(survey);
-      return generateOkResponse<CreateSurveyOutputDto>(200, { surveyDto });
+      return generateOkResponse<CreateSurveyOutputDto>({ surveyDto });
     } catch (error) {
       return handleErrorResponse<CreateSurveyOutputDto>(
         error,
@@ -54,9 +56,9 @@ export class SurveyService {
     getSurveyInput: GetSurveyInputDto,
   ): Promise<GetSurveyOutputDto> {
     try {
-      const surveyEntity = await this.findSurveyById(getSurveyInput.id);
+      const surveyEntity = await this.findSurveyById(getSurveyInput.surveyId);
       const surveyDto = this.toSurveyDto(surveyEntity);
-      return generateOkResponse<GetSurveyOutputDto>(200, { surveyDto });
+      return generateOkResponse<GetSurveyOutputDto>({ surveyDto });
     } catch (error) {
       return handleErrorResponse<GetSurveyOutputDto>(
         error,
@@ -69,12 +71,12 @@ export class SurveyService {
   async findAll(): Promise<GetSurveysOutputDto> {
     try {
       const surveyEntities = await this.surveyRepository.find({
-        relations: ['questions'],
+        relations: ['questions', 'questions.options'],
       });
       const surveyDtos = surveyEntities.map((survey) =>
         this.toSurveyDto(survey),
       );
-      return generateOkResponse<GetSurveysOutputDto>(200, {
+      return generateOkResponse<GetSurveysOutputDto>({
         surveyDtos,
       });
     } catch (error) {
@@ -92,7 +94,7 @@ export class SurveyService {
     try {
       const updatedSurvey = await this.updateAndSaveSurvey(updateSurveyInput);
       const surveyDto = this.toSurveyDto(updatedSurvey);
-      return generateOkResponse<UpdateSurveyOutputDto>(200, {
+      return generateOkResponse<UpdateSurveyOutputDto>({
         surveyDto,
       });
     } catch (error) {
@@ -108,10 +110,9 @@ export class SurveyService {
     deleteSurveyInput: DeleteSurveyInputDto,
   ): Promise<DeleteSurveyOutputDto> {
     try {
-      const survey = await this.findSurveyById(deleteSurveyInput.id);
+      const survey = await this.findSurveyById(deleteSurveyInput.surveyId);
       await this.surveyRepository.remove(survey);
-      const surveyDto = this.toSurveyDto(survey);
-      return generateOkResponse<DeleteSurveyOutputDto>(200, { surveyDto });
+      return generateOkResponse<DeleteSurveyOutputDto>();
     } catch (error) {
       return handleErrorResponse<DeleteSurveyOutputDto>(
         error,
@@ -120,7 +121,7 @@ export class SurveyService {
     }
   }
 
-  private async createAndSaveSurvey(
+  async createAndSaveSurvey(
     createSurveyInput: CreateSurveyInputDto,
   ): Promise<Survey> {
     const survey = this.surveyRepository.create(createSurveyInput);
@@ -129,18 +130,26 @@ export class SurveyService {
   }
 
   async findSurveyById(id: number): Promise<Survey> {
-    const survey = await this.surveyRepository.findOne({ where: { id } });
+    const survey = await this.surveyRepository.findOne({
+      where: { id },
+      relations: ['questions', 'questions.options'],
+    });
     if (!survey) {
       throw new SurveyNotFoundError('Survey not found');
     }
     return survey;
   }
 
-  private async updateAndSaveSurvey(
+  async updateAndSaveSurvey(
     updateSurveyInput: UpdateSurveyInputDto,
   ): Promise<Survey> {
-    const survey = await this.findSurveyById(updateSurveyInput.id);
-    Object.assign(survey, updateSurveyInput);
+    const survey = await this.findSurveyById(updateSurveyInput.surveyId);
+    if (updateSurveyInput.changedTitle) {
+      survey.title = updateSurveyInput.changedTitle;
+    }
+    if (updateSurveyInput.changedDescription) {
+      survey.description = updateSurveyInput.changedDescription;
+    }
     await this.surveyRepository.save(survey);
     return survey;
   }
@@ -149,15 +158,30 @@ export class SurveyService {
     const { questions } = surveyEntity;
     let questionDtos: QuestionDTO[] = [];
     if (questions) {
-      questionDtos = questions.map((question) => {
-        return {
-          text: question.text,
-          questionOrder: question.questionOrder,
-          surveyId: question.survey.id,
-          createdAt: question.createdAt,
-          updatedAt: question.updatedAt,
-        };
-      });
+      questionDtos = questions
+        .map((question) => {
+          // Option 엔티티를 OptionDTO로 변환
+          let optionDtos: OptionDTO[] = [];
+          if (question.options) {
+            optionDtos = question.options
+              .map((option) => ({
+                optionText: option.optionText,
+                optionOrder: option.optionOrder,
+                score: option.score,
+                createdAt: option.createdAt,
+                updatedAt: option.updatedAt,
+              }))
+              .sort((a, b) => a.optionOrder - b.optionOrder);
+          }
+          return {
+            questionText: question.questionText,
+            questionOrder: question.questionOrder,
+            createdAt: question.createdAt,
+            updatedAt: question.updatedAt,
+            options: optionDtos,
+          };
+        })
+        .sort((a, b) => a.questionOrder - b.questionOrder);
     }
     return {
       ...surveyEntity,
