@@ -729,6 +729,8 @@ mutation DeleteAnswerOutputDto {
 ```
 📦HeartLab_test
  ┣ 📂src
+ ┃ ┣ 📜main.ts
+ ┃ ┣ 📜app.module.ts
  ┃ ┣ 📂answer
  ┃ ┃ ┣ 📜answer.module.ts
  ┃ ┃ ┣ 📜answer.resolver.ts
@@ -784,11 +786,11 @@ mutation DeleteAnswerOutputDto {
  ┃ ┃ ┗ 📂types
  ┃ ┃ ┃ ┗ 📜question.type.ts
  ┃ ┗ 📂survey
- ┃ ┃ ┣  📜survey.module.ts
- ┃ ┃ ┣  📜survey.resolver.ts
- ┃ ┃ ┗  📜survey.service.ts
+ ┃ ┃ ┣ 📜survey.module.ts
+ ┃ ┃ ┣ 📜survey.resolver.ts
+ ┃ ┃ ┗ 📜survey.service.ts
  ┃ ┃ ┣ 📂dtos
- ┃ ┃ ┃ ┣  📜survey.dto.ts
+ ┃ ┃ ┃ ┣ 📜survey.dto.ts
  ┃ ┃ ┃ ┣ 📜create-survey.dto.ts
  ┃ ┃ ┃ ┣ 📜delete-survey.dto.ts
  ┃ ┃ ┃ ┣ 📜get-survey.dto.ts
