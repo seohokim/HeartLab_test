@@ -280,9 +280,9 @@ mutation DeleteSurveyOutputDto{
 query 예시:
 
 ```graphQL
-mutation CreateOptionOutputDto {
+mutation CreateQuestionOutputDto {
   createOption(createOptionInput: {surveyId: 1, questionOrder: 1,
-  optionOrder: 1 ,optionText: "치킨", score: 4}) {
+  questionText: "좋아하는 동물은?"}) {
     ok
     message
     surveyDto{
