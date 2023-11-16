@@ -199,8 +199,19 @@ export class AnswerService {
     answer.selectedOptions = [];
     // questionAndOptionOrders: [[질문번호, 선택한 옵션번호], ...]
     for (let [a, b] of questionAndOptionOrders) {
-      const option = await this.optionService.findOption(surveyId, a, b);
-
+      const option = await this.optionService.findOption(
+        answer.survey.id,
+        a,
+        b,
+      );
+      // 이미 선택된 옵션이면 삭제
+      const index = answer.selectedOptions.findIndex(
+        (selectedOption) => selectedOption.question.questionOrder === a,
+      );
+      if (index !== -1) {
+        answer.selectedOptions.splice(index, 1);
+      }
+      // 새로 선택한 옵션 추가
       answer.selectedOptions.push(option);
     }
     return answer;
