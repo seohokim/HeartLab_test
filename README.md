@@ -39,6 +39,8 @@
 - TypeORM: v0.3.17
 - Winston v3.11.0
 
+  <br/>
+
 ---
 
 # Getting Started
@@ -47,13 +49,17 @@
 $ git clone https://github.com/seohokim/HeartLab_test.git
 ```
 
-## npm install
+  <br/>
+
+## npm Install
 
 npm package 설치
 
 ```bash
 $ npm install
 ```
+
+  <br/>
 
 ## DB Configuration
 
@@ -63,13 +69,15 @@ $ npm install
 
 📜[`typeorm.config.ts`](https://github.com/seohokim/HeartLab_test/blob/main/src/config/typeorm.config.ts)
 
+  <br/>
+
 ## Start
 
 ```bash
 $ npm run start
 ```
-
----
+  <br/>
+    <br/>
 
 # API Specification
 
@@ -87,9 +95,13 @@ http://localhost:4000/graphql
 Content-Type: application/json
 ```
 
+  <br/>
+
 # Survey
 
 `Survey`에 관한 API입니다.
+
+  <br/>
 
 ## CreateSurvey
 
@@ -129,6 +141,8 @@ mutation CreateSurveyOutputDto{
   }
 }
 ```
+  
+  <br/>
 
 ## GetSurvey
 
@@ -160,6 +174,8 @@ query GetSurveyOutputDto{
 }
 ```
 
+  <br/>
+
 ## GetAllSurveys
 
 모든 survey 가져오기
@@ -189,6 +205,8 @@ query GetSurveysOutputDto{
   }
 }
 ```
+  
+  <br/>
 
 ## UpdateSurvey
 
@@ -223,6 +241,8 @@ mutation UpdateSurveyOutputDto{
 }
 ```
 
+  <br/>
+
 ## DeleteSurvey
 
 `surveyId`에 해당하는 survey 삭제하기
@@ -238,9 +258,13 @@ mutation DeleteSurveyOutputDto{
 }
 ```
 
+  <br/>
+
 # Question
 
 `Question`에 관한 API입니다.
+
+  <br/>
 
 ## CreateQuestion
 
@@ -275,6 +299,8 @@ mutation CreateOptionOutputDto {
 }
 ```
 
+  <br/>
+
 ## GetQuestion
 
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question 가져오기
@@ -299,6 +325,8 @@ query GetQuestionOutputDto{
   }
 }
 ```
+
+  <br/>
 
 ## UpdateQuestion
 
@@ -331,6 +359,8 @@ mutation UpdateQuestionOutputDto {
 }
 ```
 
+  <br/>
+
 ## DeleteQuestion
 
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question 삭제하기
@@ -362,9 +392,13 @@ mutation DeleteQuestionOutputDto {
 }
 ```
 
+  <br/>
+
 # Option
 
 `Option`에 관한 API입니다.
+
+  <br/>
 
 ## CreateOption
 
@@ -399,6 +433,8 @@ mutation CreateOptionOutputDto {
 }
 ```
 
+  <br/>
+
 ## GetOption
 
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question 안의 option중 원하는 순서의 option 가져오기
@@ -420,6 +456,8 @@ query GetOptionOutputDto {
   }
 }
 ```
+
+  <br/>
 
 ## UpdateOption
 
@@ -454,6 +492,8 @@ mutation UpdateOptionOutputDto {
 }
 ```
 
+  <br/>
+
 ## DeleteOption
 
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question 안의 option중 원하는 순서의 option 삭제하기
@@ -485,9 +525,13 @@ mutation DeleteOptionOutputDto {
 }
 ```
 
+  <br/>
+
 # Answer
 
 `Answer`에 관한 API입니다.
+
+  <br/>
 
 ## CreateAnswer
 
@@ -533,6 +577,8 @@ mutation CreateAnswerOutputDto {
 }
 ```
 
+  <br/>
+
 ## GetAnswer
 
 `answerId`에 해당하는 answer 불러오기
@@ -570,6 +616,8 @@ query GetAnswerOutputDto {
 }
 ```
 
+  <br/>
+
 ## GetAllAnswersForSurvey
 
 `surveyID`에 해당하는 survey안에 생성했던 모든 answer 불러오기
@@ -601,6 +649,8 @@ query GetAnswersOutputDto {
   }
 }
 ```
+
+  <br/>
 
 ## UpdateAnswer
 
@@ -644,6 +694,8 @@ mutation UpdateAnswerOutputDto {
   }
 }
 ```
+
+  <br/>
   
 ## DeleteAnswer
 
@@ -658,6 +710,8 @@ mutation DeleteAnswerOutputDto {
   }
 }
 ```
+
+  <br/>
 
 ---
 
