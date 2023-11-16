@@ -212,7 +212,7 @@ query GetSurveysOutputDto{
 
 `surveyId`에 해당하는 survey의 title과 description 수정하기
 
-> `changedTitle`, `changedDescription`은 optional하게 입력 가능
+> - `changedTitle`, `changedDescription`은 optional하게 입력 가능
 
 query 예시:
 
@@ -270,7 +270,7 @@ mutation DeleteSurveyOutputDto{
 
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question 안에 선택지 추가하기
 
-> option 생성 시 기존에 있던 option 사이에 끼워넣기 가능
+> - option 생성 시 기존에 있던 option 사이에 끼워넣기 가능
 
 query 예시:
 
@@ -404,7 +404,7 @@ mutation DeleteQuestionOutputDto {
 
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question 안에 선택지 추가하기
 
-> option 생성 시 기존에 있던 option 사이에 끼워넣기 가능
+> - option 생성 시 기존에 있던 option 사이에 끼워넣기 가능
 
 query 예시:
 
@@ -463,7 +463,7 @@ query GetOptionOutputDto {
 
 `surveyId`에 해당하는 survey안의 question중, 원하는 순서의 question 안의 option중 원하는 순서의 option 가져오기
 
-> `changedScore`와 `changedText`는 optional하게 입력 가능
+> - `changedScore`와 `changedText`는 optional하게 입력 가능
 
 query 예시:
 
@@ -537,11 +537,9 @@ mutation DeleteOptionOutputDto {
 
 `surveyId`에 해당하는 survey에 문항을 적어서`[questionOrder,optionOrder]` 답변 생성하기
 
-- 만약, `[[1,2],[3,2]]` 입력할 경우 => <br/>1번 question의 2번 option 체크, 3번 question 의 2번 option 체크
-
-- 하나의 question에서 중복해서 작성할 경우, 뒤에 있는 option을 선택. <br/>예를 들어, `[[1,1],[1,2]]`입력할 경우, <br/>1번 question의 2번 option을 선택한 것으로 간주
-  
-- survey의 모든 question에 대한 option 체크 하기 전까지 `totalScore`는 `null`로 return
+> - `[[1,2],[3,2]]` 입력할 경우 => <br/>1번 question의 2번 option 체크, 3번 question 의 2번 option 체크
+> - 하나의 question에서 중복해서 작성할 경우, 뒤에 있는 option을 선택. <br/>=>, `[[1,1],[1,2]]`입력할 경우, <br/>1번 question의 2번 option을 체크한 것으로 처리
+> - answer의 `remainedQuestion`이 없을 때 까지  `totalScore`는 `null`로 return
 
 ```graphQL
 mutation CreateAnswerOutputDto {
