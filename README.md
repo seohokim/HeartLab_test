@@ -55,9 +55,11 @@ npm package 설치
 $ npm install
 ```
 
-## DB 설정
+## DB Configuration
 
-아래 config 파일을 수정, 참고하여 DB 설정을 해주세요.
+아래 config 파일을 참고하여 DB 설정을 완료해주세요
+
+사용 DB: PostgreSQL
 
 📜[`typeorm.config.ts`](https://github.com/seohokim/HeartLab_test/blob/main/src/config/typeorm.config.ts)
 
@@ -88,9 +90,14 @@ Content-Type: application/json
 `Survey`에 관한 API입니다.
 
 ## CreateSurvey
+
+참고:
+
 _`questionOrder`는 하나의 survey 안에서의 순서 번호입니다_
 
 _`optionOrder`는 하나의 question 안에서의 순서 번호입니다_
+
+<br/>
 
 survey 생성
 
