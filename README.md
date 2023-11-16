@@ -30,7 +30,9 @@
 - TypeORM: v0.3.17
 - Winston v3.11.0
 
-## Getting Started
+---
+
+# Getting Started
 
 ```bash
 $ git clone https://github.com/seohokim/HeartLab_test.git
@@ -56,7 +58,9 @@ $ npm install
 $ npm run start:run
 ```
 
-## API Specification
+---
+
+# API Specification
 
 API endpoint는 아래와 같습니다.
 
@@ -70,7 +74,9 @@ http://localhost:4000/graphql
 Content-Type: application/json
 ```
 
-## Survey
+# Survey
+
+`Survey`에 관한 API입니다.
 
 ## CreateSurvey
 
@@ -209,7 +215,9 @@ mutation DeleteSurveyOutputDto{
 }
 ```
 
-## Question
+# Question
+
+`Question`에 관한 API입니다.
 
 ## CreateQuestion
 
@@ -327,7 +335,9 @@ mutation DeleteQuestionOutputDto {
 }
 ```
 
-## Option
+# Option
+
+`Option`에 관한 API입니다.
 
 ## CreateOption
 
@@ -444,7 +454,9 @@ mutation DeleteOptionOutputDto {
 }
 ```
 
-## Answer
+# Answer
+
+`Answer`에 관한 API입니다.
 
 ## CreateAnswer
 
