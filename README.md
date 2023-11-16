@@ -659,7 +659,7 @@ query GetAnswersOutputDto {
 
 `answerId`에 해당하는 answer의 답변 수정
 
-> [CreateAnswer](#createanswer) 설명에 자세한 로직 기재
+> [CreateAnswer](#createanswer) 여기에 자세한 로직
 
 query예시:
 
