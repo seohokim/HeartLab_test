@@ -34,75 +34,77 @@ $ npm install
 ## DB 설정
 
 아래 파일을 참고하여 DB 설정을 해주세요.
-[typeorm.config.ts][src/config/typeorm.config.ts]
+[typeorm.config.ts][./src/config/typeorm.config.ts]
 
+```
 📦HeartLab_test
-┣ 📂[src][src]
-┃ ┣ 📂[answer][src/answer]
-┃ ┃ ┣ 📜[answer.module.ts][src/answer/answer.module.ts]
-┃ ┃ ┣ 📜answer.resolver.ts
-┃ ┃ ┗ 📜answer.service.ts
-┃ ┃ ┣ 📂dtos
-┃ ┃ ┃ ┣ 📜answer.dto.ts
-┃ ┃ ┃ ┣ 📜create-answer.dto.ts
-┃ ┃ ┃ ┣ 📜delete-answer.dto.ts
-┃ ┃ ┃ ┣ 📜get-answer.dto.ts
-┃ ┃ ┃ ┗ 📜update-answer.dto.ts
-┃ ┃ ┗ 📂entities
-┃ ┃ ┃ ┗ 📜answer.entity.ts
-┃ ┣ 📂common
-┃ ┃ ┣ 📂dto
-┃ ┃ ┃ ┗ 📜core.dto.ts
-┃ ┃ ┣ 📂entity
-┃ ┃ ┃ ┗ 📜core.entity.ts
-┃ ┃ ┣ 📂error
-┃ ┃ ┃ ┗ 📜error.class.ts
-┃ ┃ ┗ 📂utils
-┃ ┃ ┃ ┗ 📜response.util.ts
-┃ ┣ 📂config
-┃ ┃ ┣ 📜typeorm.config.ts
-┃ ┃ ┗ 📂config
-┃ ┃ ┃ ┗ 📂logger.ts
-┃ ┃ ┃ ┃ ┗ 📜logger.config.ts
-┃ ┣ 📂option
-┃ ┃ ┣ 📜option.module.ts
-┃ ┃ ┣ 📜option.resolver.ts
-┃ ┃ ┗ 📜option.service.ts
-┃ ┃ ┣ 📂dtos
-┃ ┃ ┃ ┣ 📜option.dto.ts
-┃ ┃ ┃ ┣ 📜create-option.dto.ts
-┃ ┃ ┃ ┣ 📜delete-option.dto.ts
-┃ ┃ ┃ ┣ 📜get-option.dto.ts
-┃ ┃ ┃ ┗ 📜update-option.dto.ts
-┃ ┃ ┣ 📂entities
-┃ ┃ ┃ ┗ 📜option.entity.ts
-┃ ┃ ┗ 📂types
-┃ ┃ ┃ ┗ 📜option.type.ts
-┃ ┣ 📂question
-┃ ┃ ┣ 📜question.module.ts
-┃ ┃ ┣ 📜question.resolver.ts
-┃ ┃ ┗ 📜question.service.ts
-┃ ┃ ┣ 📂dtos
-┃ ┃ ┃ ┣ 📜question.dto.ts
-┃ ┃ ┃ ┣ 📜create-question.dto.ts
-┃ ┃ ┃ ┣ 📜delete-question.dto.ts
-┃ ┃ ┃ ┣ 📜get-question.dto.ts
-┃ ┃ ┃ ┗ 📜update-question.dto.ts
-┃ ┃ ┣ 📂entities
-┃ ┃ ┃ ┗ 📜question.entity.ts
-┃ ┃ ┗ 📂types
-┃ ┃ ┃ ┗ 📜question.type.ts
-┃ ┗ 📂survey
-┃ ┃ ┣ 📜survey.module.ts
-┃ ┃ ┣ 📜survey.resolver.ts
-┃ ┃ ┗ 📜survey.service.ts
-┃ ┃ ┣ 📂dtos
-┃ ┃ ┃ ┣ 📜survey.dto.ts
-┃ ┃ ┃ ┣ 📜create-survey.dto.ts
-┃ ┃ ┃ ┣ 📜delete-survey.dto.ts
-┃ ┃ ┃ ┣ 📜get-survey.dto.ts
-┃ ┃ ┃ ┗ 📜update-survey.dto.ts
-┃ ┃ ┣ 📂entities
-┃ ┃ ┃ ┗ 📜survey.entity.ts
-┃ ┃ ┗ 📂types
-┃ ┃ ┃ ┗ 📜survey.type.ts
+ ┣ 📂[src]
+ ┃ ┣ 📂answer
+ ┃ ┃ ┣ 📜answer.module.ts
+ ┃ ┃ ┣ 📜answer.resolver.ts
+ ┃ ┃ ┗ 📜answer.service.ts
+ ┃ ┃ ┣ 📂dtos
+ ┃ ┃ ┃ ┣ 📜answer.dto.ts
+ ┃ ┃ ┃ ┣ 📜create-answer.dto.ts
+ ┃ ┃ ┃ ┣ 📜delete-answer.dto.ts
+ ┃ ┃ ┃ ┣ 📜get-answer.dto.ts
+ ┃ ┃ ┃ ┗ 📜update-answer.dto.ts
+ ┃ ┃ ┗ 📂entities
+ ┃ ┃ ┃ ┗ 📜answer.entity.ts
+ ┃ ┣ 📂common
+ ┃ ┃ ┣ 📂dto
+ ┃ ┃ ┃ ┗ 📜core.dto.ts
+ ┃ ┃ ┣ 📂entity
+ ┃ ┃ ┃ ┗ 📜core.entity.ts
+ ┃ ┃ ┣ 📂error
+ ┃ ┃ ┃ ┗ 📜error.class.ts
+ ┃ ┃ ┗ 📂utils
+ ┃ ┃ ┃ ┗ 📜response.util.ts
+ ┃ ┣ 📂config
+ ┃ ┃ ┣ 📜typeorm.config.ts
+ ┃ ┃ ┗ 📂config
+ ┃ ┃ ┃ ┗ 📂logger.ts
+ ┃ ┃ ┃ ┃ ┗ 📜logger.config.ts
+ ┃ ┣ 📂option
+ ┃ ┃ ┣ 📜option.module.ts
+ ┃ ┃ ┣ 📜option.resolver.ts
+ ┃ ┃ ┗ 📜option.service.ts
+ ┃ ┃ ┣ 📂dtos
+ ┃ ┃ ┃ ┣ 📜option.dto.ts
+ ┃ ┃ ┃ ┣ 📜create-option.dto.ts
+ ┃ ┃ ┃ ┣ 📜delete-option.dto.ts
+ ┃ ┃ ┃ ┣ 📜get-option.dto.ts
+ ┃ ┃ ┃ ┗ 📜update-option.dto.ts
+ ┃ ┃ ┣ 📂entities
+ ┃ ┃ ┃ ┗ 📜option.entity.ts
+ ┃ ┃ ┗ 📂types
+ ┃ ┃ ┃ ┗ 📜option.type.ts
+ ┃ ┣ 📂question
+ ┃ ┃ ┣ 📜question.module.ts
+ ┃ ┃ ┣ 📜question.resolver.ts
+ ┃ ┃ ┗ 📜question.service.ts
+ ┃ ┃ ┣ 📂dtos
+ ┃ ┃ ┃ ┣ 📜question.dto.ts
+ ┃ ┃ ┃ ┣ 📜create-question.dto.ts
+ ┃ ┃ ┃ ┣ 📜delete-question.dto.ts
+ ┃ ┃ ┃ ┣ 📜get-question.dto.ts
+ ┃ ┃ ┃ ┗ 📜update-question.dto.ts
+ ┃ ┃ ┣ 📂entities
+ ┃ ┃ ┃ ┗ 📜question.entity.ts
+ ┃ ┃ ┗ 📂types
+ ┃ ┃ ┃ ┗ 📜question.type.ts
+ ┃ ┗ 📂survey
+ ┃ ┃ ┣  📜survey.module.ts
+ ┃ ┃ ┣  📜survey.resolver.ts
+ ┃ ┃ ┗  📜survey.service.ts
+ ┃ ┃ ┣ 📂dtos
+ ┃ ┃ ┃ ┣  📜survey.dto.ts
+ ┃ ┃ ┃ ┣ 📜create-survey.dto.ts
+ ┃ ┃ ┃ ┣ 📜delete-survey.dto.ts
+ ┃ ┃ ┃ ┣ 📜get-survey.dto.ts
+ ┃ ┃ ┃ ┗ 📜update-survey.dto.ts
+ ┃ ┃ ┣ 📂entities
+ ┃ ┃ ┃ ┗  📜survey.entity.ts
+ ┃ ┃ ┗ 📂types
+ ┃ ┃ ┃ ┗  📜survey.type.ts
+```
