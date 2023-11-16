@@ -17,7 +17,7 @@
 | ------------------------------- | :-------------------------------- | :---------------------------: | ------------------------------------------------: |
 | [CreateSurvey](#createsurvey)   | [CreateQuestion](#createquestion) | [CreateOption](#createoption) |                     [CreateAnswer](#createanswer) |
 | [GetSurvey](#getsurvey)         | [GetQuestion](#getquestion)       |    [GetOption](#getoption)    |                           [GetAnswer](#getanswer) |
-| [GetAllSurveys](#getallsurveys) |                                   |                               | [GetAllAnswersForSurvey](#getallanswersforsurvey) |
+| [GetAllSurveys](#getallsurveys) |                                   |                               | [GetAllAnswers<br/>ForSurvey](#getallanswersforsurvey) |
 | [UpdateSurvey](#updatesurvey)   | [UpdateQuestion](#updatequestion) | [UpdateOption](#updateoption) |                     [UpdateAnswer](#updateanswer) |
 | [DeleteSurvey](#deletesurvey)   | [DeleteQuestion](#deletequestion) | [DeleteOption](#deleteoption) |                     [DeleteAnswer](#deleteanswer) |
 
