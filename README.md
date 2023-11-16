@@ -541,6 +541,8 @@ mutation DeleteOptionOutputDto {
 > - 하나의 question에서 중복해서 작성할 경우, 뒤에 있는 option을 선택. <br/>=>, `[[1,1],[1,2]]`입력할 경우, <br/>1번 question의 2번 option을 체크한 것으로 처리
 > - answer의 `remainedQuestion`이 없을 때 까지  `totalScore`는 `null`로 return
 
+query 예시:
+
 ```graphQL
 mutation CreateAnswerOutputDto {
   createAnswer(createAnswerInput: {surveyId: 1,
